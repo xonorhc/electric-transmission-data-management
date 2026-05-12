@@ -1,0 +1,34 @@
+services:
+  db_dev:
+    image: postgis/postgis:15-3.3
+    container_name: postgis_electric_transmission
+    restart: always
+
+    shm_size: 256mb
+
+    ports:
+      - "${DB_PORT:-5440}:5432"
+
+    environment:
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-secret}
+      - POSTGRES_DB=${DB_NAME:-postgis}
+      - POSTGRES_HOST_AUTH_METHOD=${DB_AUTH_METHOD:-md5}
+
+    volumes:
+      - ./pgdata_electric_transmission:/var/lib/postgresql/data
+      - ./db:/docker-entrypoint-initdb.d
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10mb"
+
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1024M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
