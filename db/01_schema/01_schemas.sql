@@ -1,0 +1,2 @@
+CREATE SCHEMA IF NOT EXISTS domains;
+CREATE SCHEMA IF NOT EXISTS utility_network;
