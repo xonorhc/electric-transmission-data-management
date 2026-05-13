@@ -1,24 +1,25 @@
--- TABLE: electric_transmission_subnet_line
+-- TABLE: electric_transmission_subnet_line_subtype
 CREATE TABLE IF NOT EXISTS domains.electric_transmission_subnet_line_subtype (
     code smallint,
-    description varchar(64) NOT NULL,
+    name varchar(64) NOT NULL,
     details varchar(2000),
     PRIMARY KEY (code)
 );
 
-INSERT INTO domains.electric_transmission_subnet_line_subtype (code, description)
+INSERT INTO domains.electric_transmission_subnet_line_subtype (code, name)
 VALUES
     (0, 'Unknown'),
     (1, 'Generation'),
     (2, 'Transmission');
 
+-- TABLE: electric_transmission_subnet_line
 CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_subnet_line (
+    global_id uuid DEFAULT gen_random_uuid () UNIQUE NOT NULL, -- Index
     object_id serial,
     created_user varchar(64), -- Creator
     created_date timestamptz, -- Created
     last_edited_user varchar(64), -- Editor
     last_edited_date timestamptz, -- Edited
-    global_id uuid DEFAULT gen_random_uuid () UNIQUE NOT NULL,
     shape geometry(multilinestring, 4326) NOT NULL, -- Index
     shape_length numeric GENERATED ALWAYS AS (round(st_length (shape::geography)::numeric, 2)) STORED, -- Length
     subnetwork_name varchar(64) DEFAULT 'Unknown' NOT NULL,
@@ -32,7 +33,7 @@ CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_subnet_line (
     FOREIGN KEY (tier_name) REFERENCES domains.electric_transmission_subnet_line_subtype (code) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
+-- INDEX:
 CREATE INDEX ON utility_network.electric_transmission_subnet_line USING gist (shape);
-
 CREATE INDEX ON utility_network.electric_transmission_subnet_line (shape_length);
 
