@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_line (
     nominal_voltage_ll bigint,
     grounding smallint,
     measured_length numeric(8, 2),
-    ohm_per_length numeric(8, 2),
+    ohm_per_length domains.electric_ohms_per_km,
     section_id varchar(2000),
     transmission_line_name varchar(2000),
     PRIMARY KEY (object_id),

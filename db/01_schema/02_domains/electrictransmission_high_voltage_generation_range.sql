@@ -1,7 +1,3 @@
--- TABLE: electrictransmission_high_voltage_generation_range
-CREATE TABLE IF NOT EXISTS domains.electrictransmission_high_voltage_generation_range (
-    code smallint PRIMARY KEY,
-    description varchar(64),
-    details varchar(2000)
-);
+-- DOMAIN: electrictransmission_high_voltage_generation_range
+CREATE DOMAIN domains.electrictransmission_high_voltage_generation_range AS integer CHECK (VALUE = 5000000);
 

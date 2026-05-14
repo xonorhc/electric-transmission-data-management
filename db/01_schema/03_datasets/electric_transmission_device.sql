@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_device (
     last_edited_date timestamptz, -- Edited
     shape geometry(point, 4326) NOT NULL, -- Index
     symbol_rotation smallint DEFAULT 0 CHECK (symbol_rotation BETWEEN 0 AND 259),
-    is_subnetwork_controller smallint DEFAULT 0 NOT NULL,
+    is_subnetwork_controller boolean DEFAULT false NOT NULL,
     is_connected smallint DEFAULT 2 NOT NULL,
     subnetwork_controller_name varchar(2000) DEFAULT 'Unknown' NOT NULL, -- Index
     tier_name smallint DEFAULT 0 NOT NULL,
@@ -67,7 +67,6 @@ CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_device (
     FOREIGN KEY (construction_status) REFERENCES domains.construction_status (code) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (validation_status) REFERENCES domains.validation_status (code) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (lifecycle_status) REFERENCES domains.lifecycle_status (code) ON UPDATE CASCADE ON DELETE RESTRICT,
-    FOREIGN KEY (is_subnetwork_controller) REFERENCES domains.network_6_issubnetworkcontroller (code) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (is_connected) REFERENCES domains.network_6_isconnected (code) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (tier_name) REFERENCES domains.network_6_tiername (code) ON UPDATE CASCADE ON DELETE RESTRICT,
     FOREIGN KEY (normal_status) REFERENCES domains.electric_operating_status (code) ON UPDATE CASCADE ON DELETE RESTRICT,

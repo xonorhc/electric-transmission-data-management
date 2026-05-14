@@ -1,7 +1,5 @@
--- TABLE: electric_ohms_per_km
-CREATE TABLE IF NOT EXISTS domains.electric_ohms_per_km (
-    code smallint PRIMARY KEY,
-    description varchar(64),
-    details varchar(2000)
-);
+-- DOMAIN: electric_ohms_per_km
+CREATE DOMAIN domains.electric_ohms_per_km AS integer CHECK (VALUE BETWEEN 0 AND 999999);
+
+COMMENT ON DOMAIN domains.electric_ohms_per_km IS 'Range domain of valid values for Electric Cable resistance per KM';
 

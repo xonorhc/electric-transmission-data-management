@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS utility_network.structure_junction (
     last_edited_date timestamptz, -- Edited
     shape geometry(point, 4326) NOT NULL, -- Index
     symbol_rotation smallint DEFAULT 0 CHECK (symbol_rotation BETWEEN 0 AND 359),
-    height smallint,
+    height domains.wire_attachment_height,
     treatment smallint,
     equipment_type_or_class smallint,
     type_marker smallint,
