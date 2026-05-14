@@ -1,0 +1,25 @@
+INSERT INTO domains.wire_pole_height_combined (code, description)
+VALUES
+    (0, 'Unknown'),
+    (25, '25 Feet'),
+    (30, '30 Feet'),
+    (35, '35 Feet'),
+    (40, '40 Feet'),
+    (45, '45 Feet'),
+    (50, '50 Feet'),
+    (55, '55 Feet'),
+    (60, '60 Feet'),
+    (65, '65 Feet'),
+    (70, '70 Feet'),
+    (75, '75 Feet'),
+    (80, '80 Feet'),
+    (85, '85 Feet'),
+    (90, '90 Feet'),
+    (95, '95 Feet'),
+    (100, '100 Feet'),
+    (105, '105 Feet'),
+    (110, '110 Feet'),
+    (115, '115 Feet'),
+    (120, '120 Feet'),
+    (125, '125 Feet');
+

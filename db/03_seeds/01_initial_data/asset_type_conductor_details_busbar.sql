@@ -1,0 +1,9 @@
+INSERT INTO domains.asset_type_conductor_details_busbar (code, description)
+VALUES
+    (0, 'Unknown'),
+    (901, 'High Voltage AC'),
+    (902, 'High Voltage DC'),
+    (903, 'Meduim Voltage'),
+    (904, 'Low Voltage AC'),
+    (905, 'Low Voltage DC');
+
