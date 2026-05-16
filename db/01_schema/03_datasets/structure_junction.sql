@@ -1,18 +1,3 @@
--- TABLE: structure_junction_subtype
-CREATE TABLE IF NOT EXISTS domains.structure_junction_subtype (
-    code smallint,
-    name varchar(64) NOT NULL,
-    details varchar(2000),
-    PRIMARY KEY (code)
-);
-
-INSERT INTO domains.structure_junction_subtype (code, name, details)
-VALUES
-    (0, 'Unknown', 'The Unknown asset group in the StructureJunction feature class is used for data migration and is not intended to store known assets. It does not have any rules and network properties applied to it.'),
-    (1, 'Electric Station', 'A fence or gate surrounding critical facilities to maintain safety and security.'),
-    (2, 'Electric High Voltage Pole', 'Electric High Voltage Poles are vertical support structures used to support High Voltage or Transmission lines. Medium Voltage and Low Voltage equipment can be associated this feature type.'),
-    (3, 'Marker', 'Markers are types of structures used to warn of the location of power lines. These are frequently used for high voltage power lines or where medium voltage or higher voltage lines cross water bodies where boat booms could potentially come in contact with power lines.');
-
 -- TABLE: structure_junction
 CREATE TABLE IF NOT EXISTS utility_network.structure_junction (
     global_id uuid DEFAULT gen_random_uuid () UNIQUE NOT NULL, -- Index
@@ -45,31 +30,7 @@ CREATE TABLE IF NOT EXISTS utility_network.structure_junction (
     FOREIGN KEY (height) REFERENCES domains.wire_pole_height_combined (code) ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
--- COMMENT:
-COMMENT ON TABLE utility_network.structure_junction IS 'The Structure Junction feature class represents features which are tracked in a utilitys asset inventory system. A structure junction can be either a structural feature that a device is attached to or a container of devices.';
-COMMENT ON COLUMN utility_network.structure_junction.global_id IS 'Globally unique Identifier across geodatabases';
-COMMENT ON COLUMN utility_network.structure_junction.object_id IS 'A unique, not null integer field used to uniquely identify rows in tables in a geodatabase.';
-COMMENT ON COLUMN utility_network.structure_junction.asset_id IS 'The Asset ID or Facilit ID of the equipment';
-COMMENT ON COLUMN utility_network.structure_junction.asset_group IS 'The main classification of a utility element.';
-COMMENT ON COLUMN utility_network.structure_junction.asset_type IS 'A class that refines a utility elements classification within an asset group.';
-COMMENT ON COLUMN utility_network.structure_junction.association_status IS 'Indicates the type of association a feature or object participates in.';
-COMMENT ON COLUMN utility_network.structure_junction.supported_subnetwork_name IS 'a list of subnetwork names that the feature either has an attachment to or contains elements from';
-COMMENT ON COLUMN utility_network.structure_junction.construction_status IS 'Used to indicate if the eqiupment is Gang Operable and/or Phase Operable';
-COMMENT ON COLUMN utility_network.structure_junction.lifecycle_status IS 'The status of the feature in relation to tracing';
-COMMENT ON COLUMN utility_network.structure_junction.created_user IS 'The portal or dbms user that created the feature or object, per editor tracking';
-COMMENT ON COLUMN utility_network.structure_junction.created_date IS 'The date the object or feature was created per editor tracking';
-COMMENT ON COLUMN utility_network.structure_junction.last_edited_user IS 'The last user to edit this feature according to editor tracking';
-COMMENT ON COLUMN utility_network.structure_junction.last_edited_date IS 'The date this object or feature was last edited according to editor tracking';
-COMMENT ON COLUMN utility_network.structure_junction.shape IS 'Geometry of the feature';
-COMMENT ON COLUMN utility_network.structure_junction.symbol_rotation IS 'The angle the symbol should be rotated by';
-COMMENT ON COLUMN utility_network.structure_junction.height IS 'The heighth of this structure';
-COMMENT ON COLUMN utility_network.structure_junction.treatment IS 'The method or material used to treat the structure';
-COMMENT ON COLUMN utility_network.structure_junction.equipment_type_or_class IS 'An extra attribute to futher define equipment type without adding an additional asset type';
-COMMENT ON COLUMN utility_network.structure_junction.type_marker IS 'Describes the type of marker indicator, such as lighted';
-COMMENT ON COLUMN utility_network.structure_junction.structure_grounded IS 'Indicator that this structure is properly grounded';
-
 -- INDEX:
 CREATE INDEX ON utility_network.structure_junction (validation_status);
 CREATE INDEX ON utility_network.structure_junction (supported_subnetwork_name);
 CREATE INDEX ON utility_network.structure_junction USING gist (shape);
-

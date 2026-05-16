@@ -21,4 +21,3 @@ VALUES
     (7, 'High Voltage Service', 0, 10, 'Underground', 0, 10),
     (8, 'High Voltage Submersible Conductor', 0, 10, 'Submarine', 0, 10),
     (9, 'High Voltage Underground Conductor', 0, 10, 'Underground', 0, 10);
-

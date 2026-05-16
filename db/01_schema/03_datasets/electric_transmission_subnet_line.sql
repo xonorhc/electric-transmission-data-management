@@ -1,17 +1,3 @@
--- TABLE: electric_transmission_subnet_line_subtype
-CREATE TABLE IF NOT EXISTS domains.electric_transmission_subnet_line_subtype (
-    code smallint,
-    name varchar(64) NOT NULL,
-    details varchar(2000),
-    PRIMARY KEY (code)
-);
-
-INSERT INTO domains.electric_transmission_subnet_line_subtype (code, name)
-VALUES
-    (0, 'Unknown'),
-    (1, 'Generation'),
-    (2, 'Transmission');
-
 -- TABLE: electric_transmission_subnet_line
 CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_subnet_line (
     global_id uuid DEFAULT gen_random_uuid () UNIQUE NOT NULL, -- Index
@@ -36,4 +22,3 @@ CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_subnet_line (
 -- INDEX:
 CREATE INDEX ON utility_network.electric_transmission_subnet_line USING gist (shape);
 CREATE INDEX ON utility_network.electric_transmission_subnet_line (shape_length);
-
