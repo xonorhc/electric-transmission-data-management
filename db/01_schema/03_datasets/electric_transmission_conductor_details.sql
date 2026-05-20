@@ -52,5 +52,5 @@ CREATE TABLE IF NOT EXISTS utility_network.electric_transmission_conductor_detai
 );
 
 -- INDEX:
-CREATE INDEX ON utility_network.electric_transmission_line_transmission_conductor_details (electric_line_global_id);
-CREATE INDEX ON utility_network.electric_transmission_line_transmission_conductor_details (global_id);
+CREATE INDEX ON utility_network.electric_transmission_conductor_details (electric_line_global_id);
+CREATE INDEX ON utility_network.electric_transmission_conductor_details (global_id);
